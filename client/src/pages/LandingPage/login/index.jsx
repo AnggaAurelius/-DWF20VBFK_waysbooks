@@ -18,7 +18,7 @@ const Login = () => {
       <div className={` pl-5 pr-5 p-4 Modal ${signInModal ? "Show" : ""}`}>
         <h3 className="bold">Sign In</h3>
         <br />
-        <Form className="gray">
+        <Form className="">
           <Form.Group controlId="formBasicEmail" className="form">
             <Form.Control
               className="form"
