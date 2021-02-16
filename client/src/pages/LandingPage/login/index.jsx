@@ -51,7 +51,7 @@ const Login = () => {
               Don't have an account ?{" "}
               <a
                 className="text-dark"
-                href="#"
+                href="/#"
                 // onClick={() => switching(false)}
               >
                 <strong> Klik Here</strong>
