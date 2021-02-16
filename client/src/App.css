@@ -1,7 +1,29 @@
 .App {
   text-align: center;
 }
-
+.bold {
+  font-weight: bold;
+}
+.bg-gray {
+  background-color: #98aec4;
+}
+.bgland {
+  background-color: #e5e5e5;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  display: block;
+  z-index: -1;
+}
+.full {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+}
 .tombol {
   background-color: #c7c7c7;
   border: 3px solid #a8a8a8;
@@ -14,4 +36,37 @@
 .tombol.active {
   border: 3px solid #6b6a6a;
   border-radius: 3px;
+}
+
+.Modal {
+  position: fixed;
+  top: -80vh;
+  background-color: #ffffff;
+  width: 400px;
+  box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.15);
+  left: 40%;
+  padding: 0 12px 12px;
+  transition: all 0.6s ease-out;
+  z-index: 2;
+  border-radius: 5px;
+}
+
+.Modal.Show {
+  top: 20%;
+  z-index: 2;
+}
+
+.Overlay {
+  background-color: rgba(0, 0, 0, 0.137);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  display: none;
+  z-index: 1;
+}
+
+.Overlay.Show {
+  display: block;
 }
