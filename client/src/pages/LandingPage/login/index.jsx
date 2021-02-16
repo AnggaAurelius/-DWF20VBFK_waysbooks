@@ -1,10 +1,66 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
+import { AppContext } from "../../../component/context/Global";
 import { Form } from "react-bootstrap";
+import { API, setAuthToken } from "../../../config/axios";
 
 const Login = () => {
+  const history = useHistory();
+  const [state, dispatch] = useContext(AppContext);
+
   const [signInModal, setSignInModal] = useState(false);
   const setOverlay = () => {
     setSignInModal(false);
+  };
+
+  // Login
+  //
+  const [loginFormData, setLoginFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { email, password } = loginFormData;
+
+  const handleLogin = (e) => {
+    setLoginFormData({ ...loginFormData, [e.target.name]: e.target.value });
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const body = JSON.stringify({
+        email,
+        password,
+      });
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const user = await API.post("/login", body, config);
+      const result = user.data.data.user;
+
+      if (result.role === "ADMIN") {
+        dispatch({
+          type: "ADMIN",
+          payload: result,
+        });
+        history.push("/dashboard");
+      } else {
+        dispatch({
+          type: "LOGIN_SUKSES",
+          payload: result,
+        });
+        history.push("/beranda");
+      }
+      setAuthToken(result.token);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -18,15 +74,15 @@ const Login = () => {
       <div className={` pl-5 pr-5 p-4 Modal ${signInModal ? "Show" : ""}`}>
         <h3 className="bold">Sign In</h3>
         <br />
-        <Form className="">
+        <Form onSubmit={(e) => onSubmit(e)}>
           <Form.Group controlId="formBasicEmail" className="form">
             <Form.Control
               className="form"
               type="email"
               placeholder="Email"
               name="email"
-              // value={email}
-              // onChange={(e) => handleLogin(e)}
+              value={email}
+              onChange={(e) => handleLogin(e)}
               required
             />
           </Form.Group>
@@ -36,8 +92,8 @@ const Login = () => {
               type="password"
               placeholder="Password"
               name="password"
-              // value={password}
-              // onChange={(e) => handleLogin(e)}
+              value={password}
+              onChange={(e) => handleLogin(e)}
               required
             />
           </Form.Group>

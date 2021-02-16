@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { AppContext } from "../../component/context/Global";
 import { Link } from "react-router-dom";
 
-const HomePage = () => {
+const Admin = () => {
   const [state, dispatch] = useContext(AppContext);
 
   const handleLogOut = () => {
@@ -13,7 +13,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <h1>Ini Homepage</h1>
+      <h2>Dashboard admin</h2>
       <Link to="/" className="linkSide" onClick={handleLogOut}>
         <p className="">Logout</p>
       </Link>
@@ -21,4 +21,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Admin;
