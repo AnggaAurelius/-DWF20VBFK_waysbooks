@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
+import { Context } from "../../../component/context/modal";
 import { AppContext } from "../../../component/context/Global";
 import { Form } from "react-bootstrap";
 import { API, setAuthToken } from "../../../config/axios";
@@ -7,10 +8,19 @@ import { API, setAuthToken } from "../../../config/axios";
 const Login = () => {
   const history = useHistory();
   const [state, dispatch] = useContext(AppContext);
+  const [state2, dispatch2] = useContext(Context);
+  const setModal = state2.modalSignIn;
 
-  const [signInModal, setSignInModal] = useState(false);
-  const setOverlay = () => {
-    setSignInModal(false);
+  const switching = () => {
+    if (!setModal) {
+      dispatch2({
+        type: "SIGN_IN",
+      });
+    } else {
+      dispatch2({
+        type: "SIGN_UP",
+      });
+    }
   };
 
   // Login
@@ -65,13 +75,10 @@ const Login = () => {
 
   return (
     <div className="container">
-      <button
-        className="tombol sign signIn"
-        onClick={() => setSignInModal(!signInModal)}
-      >
+      <button className="tombol sign signIn" onClick={() => switching()}>
         Sign In
       </button>
-      <div className={` pl-5 pr-5 p-4 Modal ${signInModal ? "Show" : ""}`}>
+      <div className={` pl-5 pr-5 p-4 Modal ${setModal ? "Show" : ""}`}>
         <h3 className="bold">Sign In</h3>
         <br />
         <Form onSubmit={(e) => onSubmit(e)}>
@@ -105,21 +112,13 @@ const Login = () => {
             <br />
             <p className="text-center">
               Don't have an account ?{" "}
-              <a
-                className="text-dark"
-                href="/#"
-                // onClick={() => switching(false)}
-              >
+              <a className="text-dark" href="/#" onClick={() => switching()}>
                 <strong> Klik Here</strong>
               </a>
             </p>
           </div>
         </Form>
       </div>
-      <div
-        className={`Overlay ${signInModal ? "Show" : ""}`}
-        onClick={() => setOverlay()}
-      />
     </div>
   );
 };

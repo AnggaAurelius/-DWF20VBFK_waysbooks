@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
+import { Context } from "../../../component/context/modal";
 import { AppContext } from "../../../component/context/Global";
 import { Form } from "react-bootstrap";
 import { API, setAuthToken } from "../../../config/axios";
@@ -7,9 +8,20 @@ import { API, setAuthToken } from "../../../config/axios";
 const Register = () => {
   const history = useHistory();
   const [state, dispatch] = useContext(AppContext);
+  const [state2, dispatch2] = useContext(Context);
+  const setModal = state2.modalSignUp;
 
-  const [signUpModal, setSignUpModal] = useState(false);
-  const setOverlay = () => setSignUpModal(false);
+  const switching = () => {
+    if (!setModal) {
+      dispatch2({
+        type: "SIGN_UP",
+      });
+    } else {
+      dispatch2({
+        type: "SIGN_IN",
+      });
+    }
+  };
 
   const [formDataRegister, setFormDataRegister] = useState({
     email: "",
@@ -55,13 +67,10 @@ const Register = () => {
   };
   return (
     <div className="container">
-      <button
-        className="tombol sign signUp"
-        onClick={() => setSignUpModal(!signUpModal)}
-      >
+      <button className="tombol sign signUp" onClick={() => switching()}>
         Sign Up
       </button>
-      <div className={`pl-5 pr-5 Modal ${signUpModal ? "Show" : ""}`}>
+      <div className={`pl-5 pr-5 Modal ${setModal ? "Show" : ""}`}>
         <h3 className="mgtop pt-4 bold">Sign Up</h3>
         <br />
         <Form onSubmit={(e) => registerSubmit(e)}>
@@ -100,7 +109,7 @@ const Register = () => {
           </Form.Group>
           <br />
           <div className="">
-            <button className="w00 btn-red" type="submit">
+            <button className="tombol" type="submit">
               Sign Up
             </button>
             <p className="mt-4 text-center">
@@ -108,7 +117,7 @@ const Register = () => {
               <a
                 className="text-dark"
                 href="/#"
-                // onClick={() => switching(true)}
+                onClick={() => switching(true)}
               >
                 <strong> Klik Here</strong>
               </a>
@@ -116,10 +125,6 @@ const Register = () => {
           </div>
         </Form>
       </div>
-      <div
-        className={`Overlay ${signUpModal ? "Show" : ""}`}
-        onClick={() => setOverlay()}
-      />
     </div>
   );
 };
