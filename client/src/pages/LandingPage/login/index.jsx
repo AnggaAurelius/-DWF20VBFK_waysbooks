@@ -64,7 +64,6 @@ const Login = () => {
         className={`Overlay ${signInModal ? "Show" : ""}`}
         onClick={() => setOverlay()}
       />
-      <div className="bgland" />
     </div>
   );
 };
