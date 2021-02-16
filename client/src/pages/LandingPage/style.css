@@ -1,0 +1,32 @@
+.signIn {
+  width: 100px;
+  background-color: #58bd4f;
+  border: 3px solid #58a365;
+}
+.signIn:hover,
+.signIn:active,
+.signIn:focus,
+.signIn.active {
+  background-color: #58bd4f;
+  border: 3px solid #17882a;
+}
+
+.signUp {
+  width: 100px;
+  background-color: #4f82bd;
+  border: 3px solid #5869a3;
+  margin-left: 150px;
+}
+.signUp:hover,
+.signUp:active,
+.signUp:focus,
+.signUp.active {
+  background-color: #4f7fbd;
+  border: 3px solid #175188;
+}
+
+.sign {
+  position: absolute;
+  top: 50px;
+  left: 41%;
+}
