@@ -6,13 +6,14 @@ const { uploadBook } = require("../middlewares/uploadBook");
 
 const { getUsers } = require("../controllers/users");
 
-const { register, login } = require("../controllers/auth");
+const { register, login, checkAuth } = require("../controllers/auth");
 
 const { getBooks, getBooksById, addBook } = require("../controllers/books");
 
 // auth
 router.post("/register", register);
 router.post("/login", login);
+router.get("/check-auth", authenticated, checkAuth);
 
 // users
 router.get("/users", authenticated, isAdmin, getUsers);

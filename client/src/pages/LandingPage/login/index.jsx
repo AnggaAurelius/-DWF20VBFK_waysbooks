@@ -56,7 +56,7 @@ const Login = () => {
 
       if (result.role === "ADMIN") {
         dispatch({
-          type: "ADMIN",
+          type: "LOGIN_SUKSES",
           payload: result,
         });
         history.push("/dashboard");

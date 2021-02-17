@@ -4,8 +4,8 @@ export const AppContext = createContext();
 
 const initialState = {
   isLogin: false,
-  isAdmin: false,
   user: null,
+  loading: true,
 };
 
 const reducer = (state, action) => {
@@ -20,23 +20,29 @@ const reducer = (state, action) => {
           email: action.payload.email,
           fullName: action.payload.fullName,
         },
+        loading: false,
       };
-    case "ADMIN":
-      localStorage.setItem("token", action.payload.token);
-
+    case "USER_LOADED":
       return {
         ...state,
-        isAdmin: true,
+        isLogin: true,
         user: {
-          emaill: action.payload.email,
+          email: action.payload.email,
           fullName: action.payload.fullName,
         },
+        loading: false,
       };
+    case "AUTH_ERROR":
     case "LOGOUT":
       localStorage.removeItem("token");
       return {
         ...state,
         isLogin: false,
+        user: {
+          id: "",
+          email: "",
+          fullName: "",
+        },
       };
     default:
       throw new Error();

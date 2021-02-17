@@ -1,32 +1,31 @@
 .signIn {
-  width: 100px;
-  background-color: #58bd4f;
+  margin-right: 120px;
+  background-color: #95b992;
   border: 3px solid #58a365;
 }
 .signIn:hover,
 .signIn:active,
 .signIn:focus,
 .signIn.active {
-  background-color: #58bd4f;
+  background-color: #adc9ab;
   border: 3px solid #17882a;
 }
 
 .signUp {
-  width: 100px;
-  background-color: #4f82bd;
+  background-color: #a8b5c5;
   border: 3px solid #5869a3;
-  margin-left: 150px;
 }
 .signUp:hover,
 .signUp:active,
 .signUp:focus,
 .signUp.active {
-  background-color: #4f7fbd;
-  border: 3px solid #175188;
+  background-color: #92b5e2;
+  border: 3px solid #6a7f92;
 }
 
 .sign {
+  width: 100px;
   position: absolute;
   top: 50px;
-  left: 41%;
+  right: 100px;
 }
