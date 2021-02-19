@@ -74,12 +74,12 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
+    <div className="">
       <button className="tombol sign signIn" onClick={() => switching()}>
-        Sign In
+        Login
       </button>
       <div className={` pl-5 pr-5 p-4 Modal ${setModal ? "Show" : ""}`}>
-        <h3 className="bold">Sign In</h3>
+        <p className="timesNew text-left pt-3 fs-35">Login</p>
         <br />
         <Form onSubmit={(e) => onSubmit(e)}>
           <Form.Group controlId="formBasicEmail" className="form">
@@ -105,8 +105,8 @@ const Login = () => {
             />
           </Form.Group>
           <br />
-          <button className="tombol" type="submit">
-            Sign in
+          <button className="tombol w00 blackBtn bold w-18" type="submit">
+            Login
           </button>
           <div>
             <br />

@@ -1,31 +1,90 @@
 .signIn {
   margin-right: 120px;
-  background-color: #95b992;
-  border: 3px solid #58a365;
+  background-color: #ffffff;
+  border: 3px solid #3f3f3f;
+  font-size: 14px;
 }
 .signIn:hover,
 .signIn:active,
 .signIn:focus,
 .signIn.active {
-  background-color: #adc9ab;
-  border: 3px solid #17882a;
-}
-
-.signUp {
-  background-color: #a8b5c5;
-  border: 3px solid #5869a3;
-}
-.signUp:hover,
-.signUp:active,
-.signUp:focus,
-.signUp.active {
-  background-color: #92b5e2;
-  border: 3px solid #6a7f92;
+  background-color: #dddddd;
+  border: 3px solid #000000;
 }
 
 .sign {
   width: 100px;
+  height: 30px;
   position: absolute;
   top: 50px;
   right: 100px;
+  padding: 1px;
+  font-size: 14px;
+}
+.form {
+  background: rgba(210, 210, 210, 0.25);
+  border: 1px solid #bcbcbc;
+  box-sizing: border-box;
+  border-radius: 4px;
+  height: 45px;
+}
+Form button {
+  height: 50px;
+  border-radius: 1px;
+}
+
+.showBooks {
+  margin-top: 190px;
+  background-color: #e5e5e5;
+}
+
+.popularBook {
+  max-height: 345px;
+  max-width: 504px;
+  font-size: 14px;
+  margin-right: 50px;
+}
+.imgCover {
+  height: 345px;
+  width: 237px;
+  cursor: pointer;
+}
+.title {
+  position: absolute;
+  left: 270px;
+  padding-top: 45px;
+  font-family: Times;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  cursor: pointer;
+  width: 250px;
+  line-height: 30px;
+}
+.author {
+  padding-top: 110px;
+  font-style: italic;
+  font-size: 14px;
+}
+.description {
+  font-size: 14px;
+  text-align: justify;
+  line-height: 18px;
+}
+.price {
+  font-weight: 800;
+  font-size: 18px;
+  color: #44b300;
+}
+.btnCart {
+  width: 215px;
+  height: 39px;
+  color: white;
+}
+.listBook {
+  margin-left: 100px;
+}
+.book {
+  width: 200px;
+  height: 270px;
 }

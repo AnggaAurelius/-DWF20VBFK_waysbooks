@@ -66,12 +66,15 @@ const Register = () => {
     }
   };
   return (
-    <div className="container">
-      <button className="tombol sign signUp" onClick={() => switching()}>
-        Sign Up
+    <div className="">
+      <button
+        className="tombol sign signUp blackBtn white"
+        onClick={() => switching()}
+      >
+        Register
       </button>
       <div className={`pl-5 pr-5 Modal ${setModal ? "Show" : ""}`}>
-        <h3 className="mgtop pt-4 bold">Sign Up</h3>
+        <h3 className=" pt-5 timesNew text-left fs-35">Register</h3>
         <br />
         <Form onSubmit={(e) => registerSubmit(e)}>
           <Form.Group controlId="formBasicEmail" className=" form">
@@ -109,8 +112,8 @@ const Register = () => {
           </Form.Group>
           <br />
           <div className="">
-            <button className="tombol" type="submit">
-              Sign Up
+            <button className="tombol w00 blackBtn bold w-18" type="submit">
+              Register
             </button>
             <p className="mt-4 text-center">
               Already have an account ?{" "}

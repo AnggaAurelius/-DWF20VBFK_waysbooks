@@ -52,7 +52,15 @@ exports.getBooksById = async (req, res) => {
 exports.addBook = async (req, res) => {
   const { files } = req;
 
-  const { title, publicationDate, pages, author, isbn, about } = req.body;
+  const {
+    title,
+    publicationDate,
+    pages,
+    author,
+    ISBN,
+    description,
+    price,
+  } = req.body;
 
   try {
     const book = await Book.create({
@@ -60,14 +68,15 @@ exports.addBook = async (req, res) => {
       publicationDate,
       pages,
       author,
-      isbn,
-      about,
+      ISBN,
+      price,
+      description,
       thumbnail: files.thumbnail[0].filename,
       bookAttachment: files.bookAttachment[0].filename,
     });
 
     res.send({
-      message: "Posts Successfully Created",
+      message: "Book Successfully Created",
       data: {
         book,
       },

@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import "./App.css";
+import "./ok.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { PrivateRoute } from "./component/route/PrivateRoute";
@@ -13,6 +14,10 @@ import LandingPage from "./pages/LandingPage";
 import HomePage from "./pages/HomePage";
 import Admin from "./pages/Admin";
 import Add from "./pages/Admin/AddBook";
+import Profile from "./pages/ProfilePage";
+import DetailBook from "./pages/DetailBook";
+import Cart from "./pages/Cart";
+import List from "./pages/Admin/Transaction";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -54,8 +59,12 @@ const App = () => {
           <Switch>
             <Route path="/" exact component={LandingPage} />
             <PrivateRoute exact path="/beranda" component={HomePage} />
+            <PrivateRoute path="/profile" exact component={Profile} />
+            <PrivateRoute path="/detail/:id" exact component={DetailBook} />
+            <PrivateRoute path="/cart" exact component={Cart} />
             <PrivateRoute exact path="/dashboard" component={Admin} />
             <PrivateRoute path="/add" exact component={Add} />
+            <PrivateRoute path="/list" exact component={List} />
           </Switch>
         </div>
       </Router>

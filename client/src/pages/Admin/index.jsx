@@ -14,6 +14,10 @@ const Admin = () => {
   return (
     <div>
       <h2>Dashboard admin</h2>
+      <Link to="/add" className="">
+        {" "}
+        add book
+      </Link>
       <Link to="/" className="linkSide" onClick={handleLogOut}>
         <p className="">Logout</p>
       </Link>
