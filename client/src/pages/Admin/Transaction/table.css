@@ -13,12 +13,20 @@
   padding: 5px 15px;
 }
 .content-table tbody tr {
+  height: 65px;
   border-bottom: 2px solid #d3d3d3;
+  background-color: #e5e5e586;
+}
+.content-table tbody tr:hover {
+  background-color: #c2ced685;
 }
 .content-table tbody tr:nth-of-type(odd) {
-  background-color: #ffffff;
+  background-color: #ffffff77;
 }
-.dropbtn {
+.content-table tbody tr:nth-of-type(odd):hover {
+  background-color: #c2ced67a;
+}
+.dro .dropbtn {
   padding: 10px;
   font-size: 12px;
 }
@@ -59,6 +67,10 @@
   text-align: center;
 }
 .aksi {
+  padding: 15px 25px 15px 15px;
+  cursor: pointer;
+}
+.aksi2 {
   padding: 15px 25px 15px 15px;
   cursor: pointer;
 }

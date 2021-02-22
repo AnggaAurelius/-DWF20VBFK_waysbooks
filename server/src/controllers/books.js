@@ -2,7 +2,11 @@ const { Book } = require("../../models");
 
 exports.getBooks = async (req, res) => {
   try {
-    const books = await Book.findAll();
+    const books = await Book.findAll({
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
+    });
 
     res.send({
       status: "success",
@@ -32,7 +36,7 @@ exports.getBooksById = async (req, res) => {
 
     if (!book) {
       return res.send({
-        status: "success",
+        status: "error",
         message: `Book with id ${id} Not Existed`,
       });
     }

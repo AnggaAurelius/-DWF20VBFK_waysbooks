@@ -59,6 +59,9 @@ const Register = () => {
       });
 
       setAuthToken(user.data.data.user.token);
+      dispatch2({
+        type: "CLOSE",
+      });
 
       history.push("/beranda");
     } catch (error) {

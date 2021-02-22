@@ -1,12 +1,14 @@
-import React, { useState } from "react";
-import file from "./AttacheBook.png";
+import React, { useState, useEffect } from "react";
 import add from "./addBtn.png";
 import ic from "./ic_attach.png";
-
+import bgw from "../../bgw.jpg";
+import { Modal } from "react-bootstrap";
 import { API } from "../../../config/axios";
 import Navbar from "../../../component/Navbar";
 
 export const AddBook = () => {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
   const [form, setForm] = useState({
     title: "",
     publicationDate: "",
@@ -61,7 +63,7 @@ export const AddBook = () => {
       };
 
       await API.post("/upload-book", body, config);
-      alert("ok");
+      setShow(true);
       setForm({
         title: "",
         publicationDate: "",
@@ -77,9 +79,8 @@ export const AddBook = () => {
       console.log(error);
     }
   };
-
   return (
-    <div className="bg">
+    <div className=" bgImage" style={{ backgroundImage: `url( ${bgw})` }}>
       <Navbar />
       <div className="mlr ">
         <h1 className="mbot timesNew text-left">Add Book</h1>
@@ -168,7 +169,7 @@ export const AddBook = () => {
               <img className="float-right ml-3" src={ic} alt="" />
             </label>
           </div>
-          <div className="form-group mt-3">
+          <div className="form-group mt-3  ">
             <input
               type="file"
               id="actual-btn2"
@@ -177,7 +178,7 @@ export const AddBook = () => {
               className="inputFile"
               hidden
             />
-            <label for="actual-btn2" className="coverBtn bold pointer ">
+            <label for="actual-btn2" className="coverBtn bold pointer  ">
               Attache Book File
               <img className="float-right ml-2" src={ic} alt="" />
             </label>
@@ -192,6 +193,13 @@ export const AddBook = () => {
           <br />
         </form>
       </div>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        className="pt-5 mt-5 fs-20 green avenir"
+      >
+        <Modal.Body className="center">Successfully added book</Modal.Body>
+      </Modal>
     </div>
   );
 };

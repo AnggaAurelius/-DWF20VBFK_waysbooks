@@ -1,21 +1,11 @@
-import React, { useContext } from "react";
-import { AppContext } from "../../component/context/Global";
-import { Link } from "react-router-dom";
+import React from "react";
 import Navbar from "../../component/Navbar";
 import { ShowBooks } from "../LandingPage/ShowBooks";
+import bgw from "../LandingPage/bgw.jpg";
 
 const HomePage = () => {
-  const [state, dispatch] = useContext(AppContext);
-  const role = state.user.role;
-
-  const handleLogOut = () => {
-    dispatch({
-      type: "LOGOUT",
-    });
-  };
-
   return (
-    <div>
+    <div className=" bgImage " style={{ backgroundImage: `url( ${bgw})` }}>
       <Navbar />
       <ShowBooks />
     </div>

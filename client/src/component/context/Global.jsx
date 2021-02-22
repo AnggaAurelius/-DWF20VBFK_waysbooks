@@ -4,6 +4,7 @@ export const AppContext = createContext();
 
 const initialState = {
   isLogin: false,
+  isAdmin: false,
   user: null,
   loading: true,
 };
@@ -20,6 +21,7 @@ const reducer = (state, action) => {
           email: action.payload.email,
           fullName: action.payload.fullName,
           role: action.payload.role,
+          avatar: action.payload.avatar,
         },
         loading: false,
       };
@@ -31,8 +33,31 @@ const reducer = (state, action) => {
           email: action.payload.email,
           fullName: action.payload.fullName,
           role: action.payload.role,
+          avatar: action.payload.avatar,
         },
         loading: false,
+      };
+    case "ADMIN":
+      localStorage.setItem("token", action.payload.token);
+
+      return {
+        ...state,
+        isAdmin: true,
+        user: {
+          emaill: action.payload.email,
+          fullName: action.payload.fullName,
+          role: action.payload.role,
+        },
+      };
+    case "ADMIN_LOADED":
+      return {
+        ...state,
+        isAdmin: true,
+        user: {
+          emaill: action.payload.email,
+          fullName: action.payload.fullName,
+          role: action.payload.role,
+        },
       };
     case "AUTH_ERROR":
     case "LOGOUT":

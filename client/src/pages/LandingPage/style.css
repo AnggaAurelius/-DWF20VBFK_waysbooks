@@ -35,14 +35,24 @@ Form button {
 
 .showBooks {
   margin-top: 190px;
-  background-color: #e5e5e5;
+  /* background-color: #e5e5e5; */
 }
 
+.bgray {
+  background-color: #e5e5e5;
+}
+.bgray2 {
+  background-color: #691d1d;
+  height: 100px;
+  width: 100%;
+  z-index: -1;
+  position: relative;
+}
 .popularBook {
   max-height: 345px;
-  max-width: 504px;
+  max-width: 450px;
   font-size: 14px;
-  margin-right: 50px;
+  margin-right: 5px;
 }
 .imgCover {
   height: 345px;
@@ -51,14 +61,14 @@ Form button {
 }
 .title {
   position: absolute;
-  left: 270px;
-  padding-top: 45px;
+  left: 260px;
+  padding-top: 35px;
   font-family: Times;
   font-style: normal;
   font-weight: bold;
   font-size: 24px;
   cursor: pointer;
-  width: 250px;
+  width: 205px;
   line-height: 30px;
 }
 .author {
@@ -77,9 +87,17 @@ Form button {
   color: #44b300;
 }
 .btnCart {
-  width: 215px;
+  width: 170px;
   height: 39px;
   color: white;
+}
+.btnCart2 {
+  position: absolute;
+  width: 170px;
+  height: 39px;
+  color: white;
+  margin-top: -40px;
+  z-index: 2;
 }
 .listBook {
   margin-left: 100px;

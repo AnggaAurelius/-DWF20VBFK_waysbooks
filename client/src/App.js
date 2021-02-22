@@ -8,23 +8,21 @@ import { AdminRoute } from "./component/route/AdminRoute";
 import { ContextProvider } from "./component/context/modal";
 import { AppContext } from "./component/context/Global";
 import { API, setAuthToken } from "./config/axios";
-import { useHistory } from "react-router-dom";
 
 import LandingPage from "./pages/LandingPage";
 import HomePage from "./pages/HomePage";
-import Admin from "./pages/Admin";
 import Add from "./pages/Admin/AddBook";
 import Profile from "./pages/ProfilePage";
 import DetailBook from "./pages/DetailBook";
 import Cart from "./pages/Cart";
 import List from "./pages/Admin/Transaction";
+import { Loading } from "./pages/HomePage/fakeLoading";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
 const App = () => {
-  const history = useHistory();
   const [state, dispatch] = useContext(AppContext);
   const checkUser = async () => {
     try {
@@ -47,7 +45,6 @@ const App = () => {
       });
     }
   };
-  console.log(state);
   useEffect(() => {
     checkUser();
   }, []);
@@ -62,9 +59,9 @@ const App = () => {
             <PrivateRoute path="/profile" exact component={Profile} />
             <PrivateRoute path="/detail/:id" exact component={DetailBook} />
             <PrivateRoute path="/cart" exact component={Cart} />
-            <PrivateRoute exact path="/dashboard" component={Admin} />
-            <PrivateRoute path="/add" exact component={Add} />
-            <PrivateRoute path="/list" exact component={List} />
+            <AdminRoute path="/add" exact component={Add} />
+            <AdminRoute path="/list" exact component={List} />
+            <PrivateRoute path="/loading/:back" exact component={Loading} />
           </Switch>
         </div>
       </Router>

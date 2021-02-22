@@ -36,7 +36,11 @@ exports.register = async (req, res) => {
     const user = await User.create({
       ...req.body,
       role: "USER",
+      gender: "male",
+      phone: "098430243",
+      address: "Di sana",
       password: hashedPassword,
+      avatar: "profile.png",
     });
 
     const secretKey = "your-secret-key";
@@ -53,6 +57,9 @@ exports.register = async (req, res) => {
       data: {
         user: {
           email,
+          fullName: user.fullName,
+          role: user.role,
+          avatar: user.avatar,
           token,
         },
       },
@@ -114,6 +121,7 @@ exports.login = async (req, res) => {
           email,
           fullName: user.fullName,
           role: user.role,
+          avatar: user.avatar,
           token,
         },
       },

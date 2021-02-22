@@ -53,13 +53,12 @@ const Login = () => {
 
       const user = await API.post("/login", body, config);
       const result = user.data.data.user;
-
       if (result.role === "ADMIN") {
         dispatch({
-          type: "LOGIN_SUKSES",
+          type: "ADMIN",
           payload: result,
         });
-        history.push("/dashboard");
+        history.push("/add");
       } else {
         dispatch({
           type: "LOGIN_SUKSES",
@@ -68,6 +67,9 @@ const Login = () => {
         history.push("/beranda");
       }
       setAuthToken(result.token);
+      dispatch2({
+        type: "CLOSE",
+      });
     } catch (error) {
       console.log(error);
     }

@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   overflow-x: hidden;
+  background-color: #e7e4f7;
 }
 .bold {
   font-weight: bold;
@@ -169,11 +170,19 @@
   line-height: 50px;
 }
 .detailCart {
-  width: 150;
+  width: 120px;
   height: 40px;
   color: white;
   margin-bottom: 10px;
   margin-right: 20px;
+}
+.detaildwn {
+  width: 120px;
+  height: 40px;
+  color: white;
+  margin-bottom: 10px;
+  margin-right: -120px;
+  z-index: 2;
 }
 .imgMini {
   height: 15px;
@@ -246,7 +255,6 @@ hr.line2 {
   margin-top: 35px;
   margin-left: 123px;
   width: 600px;
-  z-index: -1;
 }
 .authorC {
   font-style: italic;
@@ -257,4 +265,67 @@ hr.line2 {
   font-weight: 800;
   font-size: 18px;
   color: #44b300;
+}
+.scrollY {
+  overflow-y: scroll;
+}
+.hide {
+  display: none;
+}
+.preview {
+  width: 300px;
+  height: auto;
+  margin-top: -170px;
+  margin-left: -20px;
+}
+.imgcrt {
+  margin-left: 20px;
+}
+.front {
+  z-index: 2;
+}
+.roboto {
+  font-family: "Roboto", sans-serif;
+}
+
+.avenir {
+  font-family: "Nunito Sans", sans-serif;
+}
+.cartNo {
+  position: absolute;
+  top: 50px;
+  right: 155px;
+  background-color: rgb(231, 39, 39);
+  color: white;
+  border-radius: 15px;
+  width: 20px;
+  height: 21px;
+}
+
+.bgImage {
+  background-size: auto 1790px;
+  background-repeat: no-repeat;
+}
+
+.blueTick {
+  width: auto;
+  height: 25px;
+}
+
+.profilPic {
+  width: 300px;
+  height: 250px;
+}
+.preview2 {
+  width: 300px;
+  height: auto;
+}
+.navPic {
+  margin-top: 55px;
+  min-height: 40px;
+  max-height: 40px;
+  max-width: 50px;
+}
+.crimson {
+  font-family: "Crimson Text", serif;
 }

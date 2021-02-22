@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./dropStyles.css";
 import "../ok.css";
 import book from "../pages/LandingPage/waysBooks.png";
@@ -10,6 +10,7 @@ import cart from "./cart.png";
 import list from "./list.png";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import { AppContext } from "./context/Global";
+import { API } from "../config/axios";
 
 const Navbar = () => {
   const [state, dispatch] = useContext(AppContext);
@@ -21,7 +22,21 @@ const Navbar = () => {
       type: "LOGOUT",
     });
   };
+  const [profile, setProfile] = useState([]);
+  const getUser = async () => {
+    try {
+      // setLoading(true);
+      const user = await API.get("/user");
+      // setLoading(false);
+      setProfile(user.data.data.user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const role = state.user.role;
+  useEffect(() => {
+    getUser();
+  }, []);
   return (
     <div className="nv">
       <Link to="/beranda" as={Link}>
@@ -37,7 +52,11 @@ const Navbar = () => {
             />
           </Link>
           <button onClick={onClick} className="menu-trigger">
-            <img className="mt-5 right" src={profile} alt="" />
+            <img
+              className="navPic right"
+              src={`http://localhost:5000/uploads/${profile.avatar}`}
+              alt=""
+            />
           </button>
           <nav className={`menu ${isActive ? "active" : ""}`}>
             <ul>
