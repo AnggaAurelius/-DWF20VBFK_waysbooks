@@ -15,7 +15,6 @@ const LandingPage = () => {
   const [state2, dispatch2] = useContext(Context);
   const setSignup = state2.modalSignUp;
   const setSignin = state2.modalSignIn;
-  console.log(state);
   const setOverlay = () => {
     dispatch2({
       type: "CLOSE",

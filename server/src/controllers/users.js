@@ -1,4 +1,4 @@
-const { User } = require("../../models");
+const { User, PurchasedBook, Book } = require("../../models");
 
 //
 // get user
@@ -36,11 +36,42 @@ exports.getUser = async (req, res) => {
         exclude: ["id", "createdAt", "updatedAt", "password"],
       },
     });
-
+    const purchasedBooks = await PurchasedBook.findAll({
+      where: {
+        user: req.user.id,
+        status: "true",
+      },
+      attributes: {
+        exclude: [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "bookId",
+          "transaction",
+          "user",
+          "status",
+        ],
+      },
+      include: {
+        as: "book",
+        model: Book,
+        attributes: {
+          exclude: ["createdAt", "updatedAt", "role"],
+        },
+      },
+    });
     res.send({
       status: "success",
       data: {
-        user,
+        user: {
+          fullName: user.fullName,
+          email: user.email,
+          gender: user.gender,
+          phone: user.phone,
+          avatar: user.avatar,
+          address: user.address,
+          purchasedBooks,
+        },
       },
     });
   } catch (err) {

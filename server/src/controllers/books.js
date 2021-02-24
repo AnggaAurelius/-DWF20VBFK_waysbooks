@@ -67,7 +67,7 @@ exports.addBook = async (req, res) => {
   } = req.body;
 
   try {
-    const book = await Book.create({
+    const buku = await Book.create({
       title,
       publicationDate,
       pages,
@@ -78,11 +78,43 @@ exports.addBook = async (req, res) => {
       thumbnail: files.thumbnail[0].filename,
       bookAttachment: files.bookAttachment[0].filename,
     });
+    const book = await Book.findOne({
+      where: {
+        id: buku.id,
+      },
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
+    });
 
     res.send({
       message: "Book Successfully Created",
       data: {
         book,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      message: "Server Error",
+    });
+  }
+};
+
+exports.promo = async (req, res) => {
+  try {
+    const promoBooks = await Book.findAll({
+      where: {
+        publicationDate: "2007",
+      },
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
+    });
+
+    res.send({
+      data: {
+        promoBooks,
       },
     });
   } catch (err) {

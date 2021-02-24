@@ -13,7 +13,12 @@ const {
 } = require("../controllers/users");
 
 const { register, login, checkAuth } = require("../controllers/auth");
-const { getBooks, getBooksById, addBook } = require("../controllers/books");
+const {
+  getBooks,
+  getBooksById,
+  addBook,
+  promo,
+} = require("../controllers/books");
 const {
   getCarts,
   getCart,
@@ -67,6 +72,7 @@ router.delete("/clear", authenticated, deleteSum);
 
 // books
 router.get("/books", getBooks);
+router.get("/promo", promo);
 router.get("/book/:id", getBooksById);
 router.post("/upload-book", uploadBook("thumbnail", "bookAttachment"), addBook);
 

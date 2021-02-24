@@ -139,7 +139,6 @@ const Profile = () => {
     getUser();
     getCart();
     getMyBook();
-    console.log(history2.location.pathname);
   }, []);
 
   return (

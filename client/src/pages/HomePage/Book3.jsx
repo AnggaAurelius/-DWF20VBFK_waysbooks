@@ -23,16 +23,14 @@ export const Book3 = () => {
     history.push(`/loading${path}`);
   };
   const [book, setBook] = useState([]);
-  const [des, setDes] = useState();
 
   const getBook = async () => {
     try {
       setLoading(true);
       const findBook = await API.get(`/book/${id}`);
       setBook(findBook.data.data.book);
-      setDes(findBook.data.data.book.description);
       checkBook();
-      console.log(des);
+
       setLoading(false);
     } catch (error) {
       console.log(error);
