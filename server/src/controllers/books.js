@@ -92,3 +92,28 @@ exports.addBook = async (req, res) => {
     });
   }
 };
+
+exports.promo = async (req, res) => {
+  try {
+    const books = await Book.findAll({
+      where: {
+        publicationDate: 2007,
+      },
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
+    });
+
+    res.send({
+      status: "success",
+      data: {
+        books,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      message: "Server Error",
+    });
+  }
+};
