@@ -11,15 +11,20 @@ const {
   editUser,
   editPic,
 } = require("../controllers/users");
-
+const { favBooks, addList } = require("../controllers/favoriteBook");
 const { register, login, checkAuth } = require("../controllers/auth");
-const { getBooks, getBooksById, addBook } = require("../controllers/books");
+const {
+  getBooks,
+  getBooksById,
+  addBook,
+  promo,
+} = require("../controllers/books");
 const {
   getCarts,
   getCart,
   addToCart,
   deleteCart,
-  deleteAll,
+  removeAll,
 } = require("../controllers/cart");
 const {
   getSum,
@@ -52,23 +57,18 @@ router.get("/user", authenticated, getUser);
 router.patch("/editUser", authenticated, editUser);
 router.patch("/editPic", uploadFile("imageFile"), authenticated, editPic);
 
+// books
+router.get("/books", getBooks);
+router.get("/book/:id", getBooksById);
+router.post("/upload-book", uploadBook("thumbnail", "bookAttachment"), addBook);
+router.get("/promo", promo);
+
 // cart
 router.get("/cart", authenticated, getCarts);
 router.get("/cart/:id", authenticated, getCart);
 router.post("/addCart", authenticated, addToCart);
 router.delete("/deleteCart/:id", authenticated, deleteCart);
-router.delete("/deleteAll", authenticated, deleteAll);
-
-// item
-router.get("/getsum", authenticated, getSum);
-router.post("/addsum", authenticated, addSUm);
-router.patch("/editsum", authenticated, editSum);
-router.delete("/clear", authenticated, deleteSum);
-
-// books
-router.get("/books", getBooks);
-router.get("/book/:id", getBooksById);
-router.post("/upload-book", uploadBook("thumbnail", "bookAttachment"), addBook);
+router.delete("/removeAll", authenticated, removeAll);
 
 // transaction
 router.post(
@@ -80,11 +80,20 @@ router.post(
 router.get("/transactions", authenticated, isAdmin, getTransactions);
 router.patch("/transaction/:id", authenticated, isAdmin, editTransaction);
 
+// item
+router.get("/getsum", authenticated, getSum);
+router.post("/addsum", authenticated, addSUm);
+router.patch("/editsum", authenticated, editSum);
+router.delete("/clear", authenticated, deleteSum);
+
 // purchased book
 router.get("/checkBook/:id", authenticated, checkBook);
 router.get("/getMyBook", authenticated, getMyBook);
 router.patch("/approveBook/:id", authenticated, approveBook);
 router.patch("/cancelBook/:id", authenticated, cancelBook);
 router.get("/theirBook/:id", authenticated, isAdmin, theirBook);
+
+router.get("/fav", authenticated, favBooks);
+router.post("/add-list/:id", authenticated, addList);
 
 module.exports = router;

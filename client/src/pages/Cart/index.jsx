@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import attach from "./AttacheTransaction.png";
+import empty from "./cart.png";
 import trash from "./trash.png";
 import { API } from "../../config/axios";
 import Navbar from "../../component/Navbar";
@@ -33,10 +34,10 @@ export const Cart = () => {
       console.log(error);
     }
   };
+
   const delCart = async (id, price) => {
     try {
       await API.delete(`/deleteCart/${id}`);
-      getCart();
 
       const config = {
         headers: {
@@ -48,6 +49,7 @@ export const Cart = () => {
         qty: data.qty - 1,
         pay: data.pay - price,
       });
+
       await API.patch("/editsum", edit, config);
       getCart();
     } catch (error) {
@@ -93,7 +95,7 @@ export const Cart = () => {
         imageFile: null,
       });
       setFile("");
-      await API.delete("/deleteAll");
+      await API.delete("/removeAll");
       await API.delete("/clear");
       window.scrollTo(0, 0);
       getCart();
@@ -104,11 +106,13 @@ export const Cart = () => {
   useEffect(() => {
     getCart();
   }, []);
+
   return (
     <div className=" bgImage" style={{ backgroundImage: `url( ${bgw})` }}>
       <Navbar />
       <div className="mCart text-left">
         <p className="timesNew fs-25 mb-4 pt-3">My Cart</p>
+
         <div className="row">
           <div className="order fs-18 ml-3">
             Review Your Order
@@ -134,7 +138,17 @@ export const Cart = () => {
                 />
               </div>
             ))}
+            {qty == 0 ? (
+              <div className="center">
+                <img src={empty} alt="" />
+                <h2>Unfortunately, Your Cart is Empty</h2>
+                <p className="gray">Please add something in your cart</p>
+              </div>
+            ) : (
+              <p></p>
+            )}
           </div>
+
           <div className="subTotal">
             <hr className="line2 mt-5" />
             <div className="row ml-1">
@@ -150,6 +164,7 @@ export const Cart = () => {
               <p>Total</p>
               <p className="total">Rp. {zero ? "0" : data.pay}</p>
             </div>
+
             <div className=" ml-1 mt-3">
               <form className="sub" onSubmit={(e) => submitImage(e)}>
                 <div className="form-group">
@@ -177,6 +192,7 @@ export const Cart = () => {
           </div>
         </div>
       </div>
+
       <div className={`cartNo ${qty == 0 ? "hide" : ""}`}>
         <p>{qty}</p>
       </div>

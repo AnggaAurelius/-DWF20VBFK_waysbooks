@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from "react";
 import "./dropStyles.css";
 import "../ok.css";
 import book from "../pages/LandingPage/waysBooks.png";
-import profile from "./Profile.png";
 import ic_profile from "./ic_profile.png";
 import add from "./addBook.png";
 import logOut from "./logoutRed.png";
@@ -64,6 +63,12 @@ const Navbar = () => {
                 <Link to="/profile" as={Link} className="bold">
                   <img className="mr-3" src={ic_profile} alt="" width="35px" />
                   Profile
+                </Link>
+              </li>
+              <li className={role === "ADMIN" ? "hide" : ""}>
+                <Link to="/mylist" as={Link} className="bold">
+                  <img className="mr-3" src={ic_profile} alt="" width="35px" />
+                  Wish List
                 </Link>
               </li>
               <li className={role === "USER" ? "hide" : ""}>

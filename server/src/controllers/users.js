@@ -56,7 +56,6 @@ exports.getUser = async (req, res) => {
 exports.editUser = async (req, res) => {
   try {
     const { gender, phone, address } = req.body;
-    const { files } = req;
     const user = await User.findOne({
       where: {
         id: req.user.id,

@@ -145,7 +145,7 @@ exports.deleteCart = async (req, res) => {
   }
 };
 
-exports.deleteAll = async (req, res) => {
+exports.removeAll = async (req, res) => {
   try {
     await Cart.destroy({
       where: {
