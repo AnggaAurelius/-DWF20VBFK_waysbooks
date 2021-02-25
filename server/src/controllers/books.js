@@ -103,9 +103,9 @@ exports.addBook = async (req, res) => {
 
 exports.promo = async (req, res) => {
   try {
-    const promoBooks = await Book.findAll({
+    const books = await Book.findAll({
       where: {
-        publicationDate: "2007",
+        publicationDate: 2007,
       },
       attributes: {
         exclude: ["createdAt", "updatedAt"],
@@ -113,8 +113,9 @@ exports.promo = async (req, res) => {
     });
 
     res.send({
+      status: "success",
       data: {
-        promoBooks,
+        books,
       },
     });
   } catch (err) {
