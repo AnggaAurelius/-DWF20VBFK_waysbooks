@@ -4,6 +4,7 @@ const { authenticated } = require("../middlewares/auth");
 const { isAdmin } = require("../middlewares/checkRole");
 const { uploadBook } = require("../middlewares/uploadBook");
 const { uploadFile } = require("../middlewares/upload");
+// const { uploadFiles } = require("../middlewares/uploadFile");
 
 const {
   getUsers,
@@ -55,7 +56,8 @@ router.get("/check-auth", authenticated, checkAuth);
 router.get("/users", authenticated, isAdmin, getUsers);
 router.get("/user", authenticated, getUser);
 router.patch("/editUser", authenticated, editUser);
-router.patch("/editPic", uploadFile("imageFile"), authenticated, editPic);
+router.patch("/edit-pic", uploadFile("imageFile"), authenticated, editPic);
+// router.patch("/editPic", uploadFiles("thumbnail"), authenticated, editPic);
 
 // books
 router.get("/books", getBooks);
@@ -68,7 +70,20 @@ router.get("/cart", authenticated, getCarts);
 router.get("/cart/:id", authenticated, getCart);
 router.post("/addCart", authenticated, addToCart);
 router.delete("/deleteCart/:id", authenticated, deleteCart);
-router.delete("/removeAll", authenticated, removeAll);
+
+router.delete("/deleteAll", authenticated, deleteAll);
+
+// item
+router.get("/getsum", authenticated, getSum);
+router.post("/addsum", authenticated, addSUm);
+router.patch("/editsum", authenticated, editSum);
+router.delete("/clear", authenticated, deleteSum);
+
+// books
+router.get("/books", getBooks);
+router.get("/promo", promo);
+router.get("/book/:id", getBooksById);
+router.post("/upload-book", uploadBook("thumbnail", "bookAttachment"), addBook);
 
 // transaction
 router.post(

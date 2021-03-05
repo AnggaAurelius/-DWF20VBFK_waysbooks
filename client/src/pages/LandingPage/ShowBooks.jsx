@@ -48,10 +48,10 @@ export const ShowBooks = () => {
       <div className="bgray">
         <div className="listBook row">
           {books.map((Books) => (
-            <div className="col-sm-2 mr-4 pb-4 pt-4">
+            <div className="col-lg-2 mr-4 pb-4 pt-4">
               <img
                 src={`http://localhost:5000/uploads/${Books.thumbnail}`}
-                className="book pointer"
+                className="book  pointer"
                 alt=""
                 onClick={() => read(Books.id)}
               />

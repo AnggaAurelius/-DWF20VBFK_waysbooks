@@ -129,7 +129,7 @@ const Profile = () => {
         },
       };
 
-      await API.patch("/editPic", body, config);
+      await API.patch("/edit-pic", body, config);
       history.push(`/loading${path}`);
     } catch (error) {
       console.log(error);
@@ -163,7 +163,7 @@ const Profile = () => {
                 <br />
                 <br />
                 <button
-                  className="w00 tombol btn-red white "
+                  className="w00 tombol blackBtn white "
                   onClick={handleShow}
                   type=""
                 >

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import attach from "./AttacheTransaction.png";
-import empty from "./cart.png";
-import trash from "./trash.png";
+
+import attach from "./img/AttacheTransaction.png";
+import empty from "./img/cart.png";
+import trash from "./img/trash.png";
+
 import { API } from "../../config/axios";
 import Navbar from "../../component/Navbar";
 import { Modal } from "react-bootstrap";

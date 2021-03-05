@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../../component/Navbar";
 import { ShowBooks } from "../LandingPage/ShowBooks";
-import bgw from "../LandingPage/bgw.jpg";
+import bgw from "../LandingPage/img/bgw.jpg";
 
 const HomePage = () => {
   return (

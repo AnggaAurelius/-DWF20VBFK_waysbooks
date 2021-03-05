@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import add from "./addBtn.png";
-import ic from "./ic_attach.png";
+import React, { useState } from "react";
+import add from "./img/addBtn.png";
+import ic from "./img/ic_attach.png";
 import bgw from "../../bgw.jpg";
 import { Modal } from "react-bootstrap";
 import { API } from "../../../config/axios";

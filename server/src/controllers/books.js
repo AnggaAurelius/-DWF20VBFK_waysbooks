@@ -67,7 +67,7 @@ exports.addBook = async (req, res) => {
   } = req.body;
 
   try {
-    const book = await Book.create({
+    const buku = await Book.create({
       title,
       publicationDate,
       pages,
@@ -77,6 +77,14 @@ exports.addBook = async (req, res) => {
       description,
       thumbnail: files.thumbnail[0].filename,
       bookAttachment: files.bookAttachment[0].filename,
+    });
+    const book = await Book.findOne({
+      where: {
+        id: buku.id,
+      },
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
     });
 
     res.send({

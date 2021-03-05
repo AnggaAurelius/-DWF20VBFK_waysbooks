@@ -81,3 +81,7 @@
   max-width: 400px;
   max-height: 400px;
 }
+.navPg {
+  position: absolute;
+  bottom: -3px;
+}
