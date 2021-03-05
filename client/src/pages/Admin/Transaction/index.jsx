@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "./table.css";
-import aksi from "./aksi.png";
-import blue from "./blue.png";
+import aksi from "./img/aksi.png";
+import blue from "./img/blue.png";
 import bgw from "../../bgw.jpg";
 import { API } from "../../../config/axios";
 import { Button, Modal } from "react-bootstrap";
 import Navbar from "../../../component/Navbar";
+import { Pagination } from "./Pagination";
 
 export const List = () => {
+  let no = 0;
+  const [loading, setLoading] = useState(true);
   const [show, setShow] = useState(false);
   const [modal, setModal] = useState("");
   const handleClose = () => setShow(false);
@@ -17,8 +20,7 @@ export const List = () => {
     setShow(true);
     setModal("transfer");
   };
-  let no = 1;
-  const [loading, setLoading] = useState(true);
+
   const [transaction, setTransactions] = useState([]);
   const getTransaction = async () => {
     try {
@@ -30,6 +32,10 @@ export const List = () => {
       console.log(error);
     }
   };
+  const num = [];
+  for (let i = 1; i <= transaction.length; i++) {
+    num.push(i);
+  }
 
   const payment = async (id, action) => {
     try {
@@ -78,12 +84,22 @@ export const List = () => {
     getTransaction();
   }, []);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage] = useState(7);
+
+  const lastIndex = currentPage * perPage;
+  const firstIndex = lastIndex - perPage;
+
+  const newTransacion = transaction.slice(firstIndex, lastIndex);
+  const number = num.slice(firstIndex, lastIndex);
+
+  const handlePage = (pageNumber) => setCurrentPage(pageNumber);
   return (
     <div className="minBG bgImage" style={{ backgroundImage: `url( ${bgw})` }}>
       <Navbar />
       <div className="mlr ">
         <h1 className="mbot timesNew">Incoming Transaction</h1>
-        <table className="w00 content-table ">
+        <table className="w00  content-table ">
           <thead>
             <tr className="red text-center">
               <th scope="co">No</th>
@@ -96,9 +112,9 @@ export const List = () => {
             </tr>
           </thead>
           <tbody>
-            {transaction.map((Transaction) => (
+            {newTransacion.map((Transaction) => (
               <tr key={Transaction.id}>
-                <th scope="row">{no++}</th>
+                <th scope="row">{number[no++]}</th>
                 <td>{Transaction.user.fullName}</td>
                 <td>
                   <Button
@@ -196,6 +212,11 @@ export const List = () => {
             ))}
           </tbody>
         </table>
+        <Pagination
+          perPage={perPage}
+          total={transaction.length}
+          handlePage={handlePage}
+        />
         <Modal show={show} onHide={handleClose}>
           <Modal.Body className="center pt-4 pl-4">
             {modal === "transfer" ? (

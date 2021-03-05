@@ -29,9 +29,10 @@ export const PromoteBook = () => {
       const findBook = await API.get("/promo");
       setBooks(findBook.data.data.books);
       setLoading(false);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
-  const [book2, setBook] = useState([]);
 
   const getBook = async (id) => {
     try {
