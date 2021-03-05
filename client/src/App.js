@@ -14,6 +14,7 @@ import HomePage from "./pages/HomePage";
 import Add from "./pages/Admin/AddBook";
 import Profile from "./pages/ProfilePage";
 import DetailBook from "./pages/DetailBook";
+import Mylist from "./pages/List";
 import Cart from "./pages/Cart";
 import List from "./pages/Admin/Transaction";
 import { Loading } from "./pages/HomePage/fakeLoading";
@@ -62,6 +63,7 @@ const App = () => {
             <AdminRoute path="/add" exact component={Add} />
             <AdminRoute path="/list" exact component={List} />
             <PrivateRoute path="/loading/:back" exact component={Loading} />
+            <PrivateRoute path="/mylist" exact component={Mylist} />
           </Switch>
         </div>
       </Router>

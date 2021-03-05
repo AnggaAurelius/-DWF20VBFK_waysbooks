@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+
 import attach from "./img/AttacheTransaction.png";
 import empty from "./img/cart.png";
 import trash from "./img/trash.png";
+
 import { API } from "../../config/axios";
 import Navbar from "../../component/Navbar";
 import { Modal } from "react-bootstrap";
@@ -95,7 +97,7 @@ export const Cart = () => {
         imageFile: null,
       });
       setFile("");
-      await API.delete("/deleteAll");
+      await API.delete("/removeAll");
       await API.delete("/clear");
       window.scrollTo(0, 0);
       getCart();

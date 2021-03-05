@@ -8,6 +8,7 @@ import add from "./img/addBook.png";
 import logOut from "./img/logoutRed.png";
 import cart from "./img/cart.png";
 import list from "./img/list.png";
+
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import { AppContext } from "./context/Global";
 import { API } from "../config/axios";
@@ -64,6 +65,12 @@ const Navbar = () => {
                 <Link to="/profile" as={Link} className="bold">
                   <img className="mr-3" src={ic_profile} alt="" width="35px" />
                   Profile
+                </Link>
+              </li>
+              <li className={role === "ADMIN" ? "hide" : ""}>
+                <Link to="/mylist" as={Link} className="bold">
+                  <img className="mr-3" src={ic_profile} alt="" width="35px" />
+                  Wish List
                 </Link>
               </li>
               <li className={role === "USER" ? "hide" : ""}>
