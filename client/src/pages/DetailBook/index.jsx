@@ -5,6 +5,8 @@ import { API } from "../../config/axios";
 import Navbar from "../../component/Navbar";
 import { Modal } from "react-bootstrap";
 import bgw from "../bgw.jpg";
+import Loader from "react-loader-spinner";
+
 
 export const Detailbook = () => {
   const [loading, setLoading] = useState(true);
@@ -58,6 +60,7 @@ export const Detailbook = () => {
         },
       };
       const check = await API.post("/addCart", body, config);
+      console.log(check);
       if (check.data.status === "wait") {
         setText("Please wait 1 x 24 hours to verify your order");
         setShow(true);
@@ -94,16 +97,20 @@ export const Detailbook = () => {
     getCart();
   }, []);
   return loading ? (
-    <h1>loading</h1>
+     <div className=" full bgImage pt-5 " style={{ backgroundImage: `url( ${bgw})` }}>
+     <Loader
+        type="Puff"
+        color="#00BFFF"
+        height={500}
+        width={500}
+        timeout={3000} //3 secs
+      />
+    </div>
   ) : (
     <div className="bgImage" style={{ backgroundImage: `url( ${bgw})` }}>
       <Navbar />
       <div className="mp-10 pt-60 text-left ml-270 mb-5">
-        <img
-          className="cover  float-left mr-5"
-          src={`http://localhost:5000/uploads/${book.thumbnail}`}
-          alt=""
-        />
+        <img className="cover  float-left mr-5" src={book.thumbnail} alt="" />
         <p className="mt-5 pt-5 timesNew fs-50 titleDetail">{book.title}</p>
         <h1 className="gray fs-25">{book.author}</h1>
         <div className="mt-5">

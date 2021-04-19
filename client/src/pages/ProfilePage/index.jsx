@@ -5,6 +5,7 @@ import kel from "./image/gender.png";
 import call from "./image/call.png";
 import map from "./image/map.png";
 import { useHistory } from "react-router-dom";
+import Loader from "react-loader-spinner";
 import Navbar from "../../component/Navbar";
 import { Button, Modal, Form } from "react-bootstrap";
 import { API } from "../../config/axios";
@@ -15,6 +16,7 @@ const Profile = () => {
   const history = useHistory();
   const history2 = createBrowserHistory();
   const path = history2.location.pathname;
+  const [loading, setLoading] = useState(true);
   const [state] = useContext(AppContext);
   const [show, setShow] = useState(false);
   const [modal, setModal] = useState("");
@@ -25,9 +27,9 @@ const Profile = () => {
   const [profile, setProfile] = useState([]);
   const getUser = async () => {
     try {
-      // setLoading(true);
+      setLoading(true);
       const user = await API.get("/user");
-      // setLoading(false);
+      setLoading(false);
       setProfile(user.data.data.user);
     } catch (error) {
       console.log(error);
@@ -69,7 +71,7 @@ const Profile = () => {
         },
       };
 
-      await API.patch("/editUser", body, config);
+      await API.patch("/edit-user", body, config);
       getUser();
       handleClose();
     } catch (error) {
@@ -100,7 +102,7 @@ const Profile = () => {
     setShow(true);
   };
   const [form2, setForm2] = useState({
-    imageFile: null,
+    thumbnail: null,
   });
   const [filee, setFile] = useState();
 
@@ -113,7 +115,7 @@ const Profile = () => {
     setFile(URL.createObjectURL(e.target.files[0]));
   };
 
-  const { imageFile } = form2;
+  const { thumbnail } = form2;
 
   const submitImage = async (e) => {
     e.preventDefault();
@@ -121,7 +123,7 @@ const Profile = () => {
     try {
       const body = new FormData();
 
-      body.append("imageFile", imageFile);
+      body.append("thumbnail", thumbnail);
 
       const config = {
         headers: {
@@ -141,7 +143,17 @@ const Profile = () => {
     getMyBook();
   }, []);
 
-  return (
+  return loading ? (
+     <div className=" full bgImage pt-5 " style={{ backgroundImage: `url( ${bgw})` }}>
+     <Loader
+        type="Puff"
+        color="#00BFFF"
+        height={500}
+        width={500}
+        timeout={3000} //3 secs
+      />
+    </div>
+  ) : (
     <div className=" bgImage" style={{ backgroundImage: `url( ${bgw})` }}>
       <div className="">
         <Navbar />
@@ -155,7 +167,7 @@ const Profile = () => {
               <br />
               <div className=" float-right pr-5">
                 <img
-                  src={`http://localhost:5000/uploads/${profile.avatar}`}
+                  src={profile.avatar}
                   alt=""
                   onClick={imgProfile}
                   className="pointer profilPic"
@@ -205,13 +217,13 @@ const Profile = () => {
             {myBook.map((mybook) => (
               <div className=" mr-4 ml-3 mb-5" key={mybook.id}>
                 <a
-                  href={`http://localhost:5000/uploads/${mybook.book.bookAttachment}`}
+                  href={mybook.book.bookAttachment}
                   className="bold"
                   target="_blank"
                 >
                   <img
                     className="lbook flink text-center"
-                    src={`http://localhost:5000/uploads/${mybook.book.thumbnail}`}
+                    src={mybook.book.thumbnail}
                     alt=""
                   />
                 </a>
@@ -223,7 +235,7 @@ const Profile = () => {
                 </h3>
                 <p className="gray authorPr">{mybook.book.author}</p>
                 <a
-                  href={`http://localhost:5000/uploads/${mybook.book.bookAttachment}`}
+                  href={mybook.book.bookAttachment}
                   className="bold"
                   target="_blank"
                 >
@@ -298,7 +310,7 @@ const Profile = () => {
                 <Form.File
                   className="position-relative"
                   required
-                  name="imageFile"
+                  name="thumbnail"
                   onChange={(e) => onChange2(e)}
                   feedbackTooltip
                 />

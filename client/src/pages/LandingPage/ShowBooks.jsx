@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { API } from "../../config/axios";
+import Loader from "react-loader-spinner";
+import bgw from '../LandingPage/img/bgw.jpg'
 import { AppContext } from "../../component/context/Global";
 import { PromoteBook } from "../HomePage/promoteBook";
 
@@ -14,8 +16,8 @@ export const ShowBooks = () => {
     try {
       setLoading(true);
       const books = await API.get("/books");
-      setLoading(false);
       setBooks(books.data.data.books);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -34,7 +36,18 @@ export const ShowBooks = () => {
     getBooks();
     getCart();
   }, []);
-  return (
+  return loading ? (
+     <div className=" full bgImage pt-5 " style={{ backgroundImage: `url( ${bgw})` }}>
+     <Loader
+        type="Puff"
+        color="#00BFFF"
+        height={500}
+        width={500}
+        timeout={3000} //3 secs
+      />
+    </div>
+    
+  ) : (
     <div className="showBooks">
       <p className="fs-45 crimson">With us, you can shop online & help</p>
       <p className="fs-45 crimson">save your high street at the same time</p>
@@ -50,7 +63,7 @@ export const ShowBooks = () => {
           {books.map((Books) => (
             <div className="col-lg-2 mr-4 pb-4 pt-4">
               <img
-                src={`http://localhost:5000/uploads/${Books.thumbnail}`}
+                src={Books.thumbnail}
                 className="book  pointer"
                 alt=""
                 onClick={() => read(Books.id)}

@@ -4,20 +4,22 @@ import empty from "./img/cart.png";
 import trash from "./img/trash.png";
 import { API } from "../../config/axios";
 import Navbar from "../../component/Navbar";
+import Loader from "react-loader-spinner";
 import { Modal } from "react-bootstrap";
 import bgw from "../bgw.jpg";
 
 export const Cart = () => {
   const [zero, setZero] = useState(false);
   const [show, setShow] = useState(false);
+  const [loading, setLoading] = useState(false);
   const handleClose = () => setShow(false);
   let qty = 0;
   const [cart, setCart] = useState([]);
 
   const getCart = async () => {
     try {
+      setLoading(true);
       const carts = await API.get("/Cart");
-
       setCart(carts.data.data.carts);
       getSum();
     } catch (error) {
@@ -30,6 +32,7 @@ export const Cart = () => {
     try {
       const item = await API.get("/getsum");
       setData(item.data.data.sum);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -38,7 +41,6 @@ export const Cart = () => {
   const delCart = async (id, price) => {
     try {
       await API.delete(`/deleteCart/${id}`);
-
       const config = {
         headers: {
           "Content-Type": "application/json",
@@ -59,7 +61,7 @@ export const Cart = () => {
 
   //upload image
   const [form, setForm] = useState({
-    imageFile: null,
+    thumbnail: null,
   });
   const [filee, setFile] = useState();
 
@@ -72,7 +74,7 @@ export const Cart = () => {
     setFile(URL.createObjectURL(e.target.files[0]));
   };
 
-  const { imageFile } = form;
+  const { thumbnail } = form;
 
   const submitImage = async (e) => {
     e.preventDefault();
@@ -80,7 +82,7 @@ export const Cart = () => {
     try {
       const body = new FormData();
 
-      body.append("imageFile", imageFile);
+      body.append("thumbnail", thumbnail);
 
       const config = {
         headers: {
@@ -88,11 +90,11 @@ export const Cart = () => {
         },
       };
 
-      await API.post("/addTransaction", body, config);
+      await API.post("/add-transaction", body, config);
       setShow(true);
       setZero(true);
       setForm({
-        imageFile: null,
+        thumbnail: null,
       });
       setFile("");
       await API.delete("/deleteAll");
@@ -107,24 +109,30 @@ export const Cart = () => {
     getCart();
   }, []);
 
-  return (
-    <div className=" bgImage" style={{ backgroundImage: `url( ${bgw})` }}>
+  return loading ? (
+    <div className=" full bgImage pt-5 " style={{ backgroundImage: `url( ${bgw})` }}>
+     <Loader
+        type="Puff"
+        color="#00BFFF"
+        height={500}
+        width={500}
+        timeout={3000} //3 secs
+      />
+    </div>
+    
+  ) : (
+    <div className="bgImage" style={{ backgroundImage: `url( ${bgw})` }}>
       <Navbar />
-      <div className="mCart text-left">
+      <div className="mCart text-left ">
         <p className="timesNew fs-25 mb-4 pt-3">My Cart</p>
-
         <div className="row">
-          <div className="order fs-18 ml-3">
+          <div className="order fs-18  col-xl-6">
             Review Your Order
             <hr className="line2 mr-5" />
             {cart.map((Cart) => (
               <div className="row mb-5" key={Cart.id}>
                 <p hidden>{qty++}</p>
-                <img
-                  src={`http://localhost:5000/uploads/${Cart.book.thumbnail}`}
-                  alt=""
-                  className="imgOrder"
-                />
+                <img src={Cart.book.thumbnail} alt="" className="imgOrder " />
                 <div className=" ml-1 detailOr">
                   <p className="timesNew fs-25">{Cart.book.title}</p>
                   <p className=" gray authorOr">{Cart.book.author}</p>
@@ -148,8 +156,7 @@ export const Cart = () => {
               <p></p>
             )}
           </div>
-
-          <div className="subTotal">
+          <div className=" col-xl-5">
             <hr className="line2 mt-5" />
             <div className="row ml-1">
               <p>Subtotal</p>
@@ -165,13 +172,13 @@ export const Cart = () => {
               <p className="total">Rp. {zero ? "0" : data.pay}</p>
             </div>
 
-            <div className=" ml-1 mt-3">
+            <div className=" float-right mt-3">
               <form className="sub" onSubmit={(e) => submitImage(e)}>
                 <div className="form-group">
                   <input
                     type="file"
                     id="actual-btn"
-                    name="imageFile"
+                    name="thumbnail"
                     onChange={(e) => onChange(e)}
                     hidden
                   />
@@ -183,7 +190,7 @@ export const Cart = () => {
 
                 <button
                   type="submit"
-                  className="float-right blackBtn pay mr-3 mt-5"
+                  className="float-right blackBtn pay mr-4 mt-5"
                 >
                   Pay
                 </button>

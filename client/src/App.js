@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from "react";
 import "./App.css";
 import "./ok.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { PrivateRoute } from "./component/route/PrivateRoute";
 import { AdminRoute } from "./component/route/AdminRoute";
